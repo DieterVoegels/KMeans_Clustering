@@ -303,7 +303,7 @@ I learned more about the K-Means algorithm and some good practice with C++.
 
 If I had more time, probably would have optimized it a bit more, then run some 4K images through it with larger K values and see what it produces.
 
-## Footnotes
+### Footnotes
 
 [^1]: The boots do have extremely faint shading, almost completely invisible. The brown used for his boot shading was probably repurposed to seperate the white of his gloves and bottom of his boot from the tan color of his skin.
 
