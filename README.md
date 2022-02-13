@@ -6,7 +6,7 @@ External Libraries: lodepng
 
 ## Project Description
 
-This is one of the C++ projects I did for MAT345 Introduction to Data Science course during my senior year of college.
+This is one of the C++ projects I did for the MAT345 Introduction to Data Science course I took during my senior year of college.
 
 I used the K-means algorithm, which groups similar objects together into K clusters, in order to take an image and recolor it using only K colors.
 
@@ -18,28 +18,23 @@ I also ran the images through the algorithm for each K = [3, 10].
 
 As the K value increased, the image accuracy also increased. This was expected though, as there are more colors being used to recolor the image.
 
-However, I did not expect the variation in the details between adjacent K values.
+However, I did not expect the variation in the details between adjacent K values. This can be seen on the Mario images:
 
-This can be seen on the Mario images.
-
-When K = 5, only his mustache has shading.
-
-When K = 6, his boots and side burns have shading but not his mustache.
-
-When K = 7, only his side burns have shading. [^1]
-
->*Note: The third image I used, Luigi.PNG, is not represented here. The resulting images from that image are large and take up multiple pages. You can see those images in Luigi.pdf file in the OutputImages directory.*
+When K = 5, only his mustache has shading.  
+When K = 6, his boots and side burns have shading but not his mustache  
+When K = 7, only his side burns have shading.[^1]
 
 ![The original image compared to the recolored images](/OutputImages/Mario.PNG)
 
 ![The original image compared to the recolored images](/OutputImages/Toad.PNG)
 
+>*Note: The third image I used, Luigi.png, is not represented here. The resulting images from that image are large and take up multiple pages. You can see those images in the Luigi.pdf file located in the OutputImages directory.*
 
 ## Encoding and Decoding Images
 
-To decode the image I used lodepng.h, a simple open source encoding and decoding png library.
+To decode the image I used lodepng.h, a simple open source encoding and decoding png library. It decodes the image into an array of bytes, with each image being represent by 4 bytes (RGBA).
 
-It decodes the image into an array of bytes, with each image being represent by 4 bytes (RGBA). I then took each raw pixel data and converted it into a pixel data structure so it would be easier to work with.
+I took each pixels raw data and converted it into the pixel data structure so it would be easier to work with.
 
 The structure also contained the previous cluster the pixel was assigned to and the current cluster the pixel is assigned to.
 
@@ -120,7 +115,9 @@ bool EncodeImage()
 
 ## K-Means Initialization
 
-Before I can run the main loop of the algorithm, I first have to initialize the means of the K clusters. To do this I found K different pixels that were the farthest away from eachother, and created K clusters from those pixels. If I didn't do this initialization step, then all pixels would be grouped into a single cluster.
+Before I can run the main loop of the algorithm, I first have to initialize the means of the K clusters. To do this I found K different pixels that were the farthest away from eachother, and created K clusters from those pixels.
+
+If I didn't do this initialization step, then all pixels would be grouped into a single cluster.
 
 ```c++
 //Initialize the first mean to a random pixel
@@ -256,7 +253,7 @@ Since this was for a math course, I shoved all of the driver code into main() fo
 
 For each K value (3 to 10), decode the image, run K-Means algorithm on image using the current K value, and encode new pixel data into an image.
 
-Finally, clear the pixels vector so its ready for the next iteratation (pixels is the vector of the pixels of the image, from top left to bottom right).
+Finally, clear the pixels vector so its ready for the next iteratation.[^2]
 
 ```c++
 //driver
@@ -308,4 +305,6 @@ If I had more time, probably would have optimized it a bit more, then run some 4
 
 ## Footnotes
 
-[^1]: The boots do have extremely faint shading, almost completely invisible. The brown used for his boot shading was probably repurposed to seperate the white of his gloves and the bottom of his boot from the tan color of skin.
+[^1]: The boots do have extremely faint shading, almost completely invisible. The brown used for his boot shading was probably repurposed to seperate the white of his gloves and bottom of his boot from the tan color of his skin.
+
+[^2]: The pixels vector is the array of the pixels in the image, from top left to bottom right.
