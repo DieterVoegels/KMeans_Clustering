@@ -6,8 +6,6 @@ External Libraries: lodepng
 
 ## Project Description
 
----
-
 This is one of the C++ projects I did for MAT345 Introduction to Data Science course during my senior year of college.
 
 I used the K-means algorithm, which groups similar objects together into K clusters, in order to take an image and recolor it using only K colors.
@@ -17,8 +15,6 @@ I did this on three different images: An icon size image for quick testing, a 10
 I also ran the images through the algorithm for each K = [3, 10].
 
 ## Result
-
----
 
 As the K value increased, the image accuracy also increased. This was expected though, as there are more colors being used to recolor the image.
 
@@ -40,8 +36,6 @@ When K = 7, only his side burns have shading. [^1]
 
 
 ## Encoding and Decoding Images
-
----
 
 To decode the image I used lodepng.h, a simple open source encoding and decoding png library.
 
@@ -124,8 +118,6 @@ bool EncodeImage()
 
 ## K-Means Initialization
 
----
-
 Before I can run the main loop of the algorithm, I first have to initialize the means of the K clusters. To do this I found K different pixels that were the farthest away from eachother, and created K clusters from those pixels. If I didn't do this initialization step, then all pixels would be grouped into a single cluster.
 
 ```c++
@@ -175,8 +167,6 @@ for (int i = 1; i < maxClusters; i++)
 ```
 
 ## K-Means Main Loop
-
----
 
 The main loop of the K-Means algorithm is simple. For each pixel, calculate the distance from the pixel to each mean of the clusters, and assign the pixel to the cluster that has the shortest distance.
 
@@ -260,8 +250,6 @@ for (Pixel& pixel : pixels)
 
 ## Driver
 
----
-
 Since this was for a math course, I shoved all of the driver code into main() for simplicity.
 
 For each K value (3 to 10), decode the image, run K-Means algorithm on image using the current K value, and encode new pixel data into an image.
@@ -307,12 +295,8 @@ int main()
 
 ## Conclusion
 
----
-
 In the end, I had a lot of fun with this project. It was a short and simple project but produced some pretty amazing outputs. Openning up the recolored images was like openning presents on christmas day, and filled me with joy on how closely or differently the recolored images matched the original image. I look through each image to try and find the differences from eachother and the original, like a version of the *Where's Waldo?* books. I learned more about the K-Means algorithm and some good practice with C++. If I had more time, probably would have optimized it a bit more, then run some 4K images through it with larger K values and see what it produces.
 
 ## Footnotes
-
----
 
 [^1]: The boots do have extremely faint shading, almost completely invisible. The brown used for his boot shading was probably repurposed to seperate the white of his gloves and the bottom of his boot from the tan color of skin.
