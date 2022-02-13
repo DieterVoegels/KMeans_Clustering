@@ -1,30 +1,53 @@
 # K-Means Clustering
 
-## Project Description
-
-Language: C++
-
-Tools: Visual Studio 2019
-
+Language: C++  
+Tools: Visual Studio 2019  
 External Libraries: lodepng
 
-This is one of the C++ projects I did for MAT345: Introduction to Data Science course during my senior year of college. I used the K-means algorithm, which groups similar objects together into K clusters, in order to take an image and recolor it using only K colors. I did this on three different images: An icon size image for quick testing, a 1080P size image with invisible pixels, and another 1080p size image with no invisible pixels. I also ran the images through the algorithm for each K = [3, 10].
+## Project Description
+
+---
+
+This is one of the C++ projects I did for MAT345 Introduction to Data Science course during my senior year of college.
+
+I used the K-means algorithm, which groups similar objects together into K clusters, in order to take an image and recolor it using only K colors.
+
+I did this on three different images: An icon size image for quick testing, a 1080P size image with invisible pixels, and another 1080p size image with no invisible pixels.
+
+I also ran the images through the algorithm for each K = [3, 10].
 
 ## Result
 
-As the K value increased, the image accuracy also increased. This is to be expected though, as there are more colors being used to recolor the image. However, I did not expect the variation in the details between adjacent K values. This can be seen on the Mario images. When K = 5, only his mustache has shading. When K = 6, his boots and side burns have shading but not his mustache. When K = 7, only his side burns have shading (the boots do have extremely faint shading, almost completely invisible. The brown used for his boot shading was probably repurposed to seperate the white of his gloves and the bottom of his boot from the tan color of skin).
+---
 
-*Note: The third image I used, Luigi.PNG, is not represented here. The resulting images from that image are large and take up multiple pages. You can see those images in Luigi.pdf file in the OutputImages directory.*
+As the K value increased, the image accuracy also increased. This was expected though, as there are more colors being used to recolor the image.
+
+However, I did not expect the variation in the details between adjacent K values.
+
+This can be seen on the Mario images.
+
+When K = 5, only his mustache has shading.
+
+When K = 6, his boots and side burns have shading but not his mustache.
+
+When K = 7, only his side burns have shading. [^1]
+
+>*Note: The third image I used, Luigi.PNG, is not represented here. The resulting images from that image are large and take up multiple pages. You can see those images in Luigi.pdf file in the OutputImages directory.*
 
 ![The original image compared to the recolored images](/OutputImages/Mario.PNG)
 
 ![The original image compared to the recolored images](/OutputImages/Toad.PNG)
 
 
-## Encoding and Decoding
+## Encoding and Decoding Images
+
 ---
 
-To decode the image I used lodepng.h, a simple open source encoding and decoding png library. It decodes the image into an array of bytes, with each image being represent by 4 bytes (RGBA). I then took each raw pixel data and converted it into a pixel data structure so it would be easier to work with. The structure also contained the previous cluster the pixel was assigned to and the current cluster the pixel is assigned to. Once I ran the K-means algorithm on the image, I converted the pixels back into raw data form and encoded them into a new image.
+To decode the image I used lodepng.h, a simple open source encoding and decoding png library.
+
+It decodes the image into an array of bytes, with each image being represent by 4 bytes (RGBA). I then took each raw pixel data and converted it into a pixel data structure so it would be easier to work with. The structure also contained the previous cluster the pixel was assigned to and the current cluster the pixel is assigned to.
+
+Once I ran the K-means algorithm on the image, I converted the pixels back into raw data form and encoded them into a new image.
 
 ```c++
 //pixel data structure used to convert raw data into usable data
@@ -100,6 +123,7 @@ bool EncodeImage()
 ```
 
 ## K-Means Initialization
+
 ---
 
 Before I can run the main loop of the algorithm, I first have to initialize the means of the K clusters. To do this I found K different pixels that were the farthest away from eachother, and created K clusters from those pixels. If I didn't do this initialization step, then all pixels would be grouped into a single cluster.
@@ -112,7 +136,7 @@ Before I can run the main loop of the algorithm, I first have to initialize the 
 
   means[0] = pixels[distribution(generator)];
 
-//for eachother mean, find the pixel that is the farthest from the other means
+//for each other mean, find the pixel that is the farthest from the other means
 for (int i = 1; i < maxClusters; i++)
 {
   //farthest average distance and pixel
@@ -151,8 +175,14 @@ for (int i = 1; i < maxClusters; i++)
 ```
 
 ## K-Means Main Loop
+
 ---
-The main loop of the K-Means algorithm is simple. For each pixel, calculate the distance from the pixel to each mean of the clusters, and assign the pixel to the cluster that has the shortest distance. If a pixel cluster assignment changed, then recalculate the means of each cluster and reiterate. Otherwise, the algorithm is finished and all of the pixels in each cluster are closer to eachother than any other pixel. Finally, I recolor each pixel to the color of the mean of the cluster that pixel is assigned to.
+
+The main loop of the K-Means algorithm is simple. For each pixel, calculate the distance from the pixel to each mean of the clusters, and assign the pixel to the cluster that has the shortest distance.
+
+If a pixel cluster assignment changed, then recalculate the means of each cluster and reiterate. Otherwise, the algorithm is finished and all of the pixels in each cluster are closer to eachother than any other pixel.
+
+Finally, I recolor each pixel to the color of the mean of the cluster that pixel is assigned to.
 
 ```c++
 //while cluster assignements have changed, compute kmeans algorithm
@@ -229,8 +259,14 @@ for (Pixel& pixel : pixels)
 ```
 
 ## Driver
+
 ---
-Since this was for a math course, I shoved all of the driver code into main() for simplicity. For each K value (3 to 10), decode the image, run K-Means algorithm on image using the current K value, and encode new pixel data into an image. Finally, clear the pixels vector so its ready for the next iteratation (pixels is the vector of the pixels of the image, from top left to bottom right).
+
+Since this was for a math course, I shoved all of the driver code into main() for simplicity.
+
+For each K value (3 to 10), decode the image, run K-Means algorithm on image using the current K value, and encode new pixel data into an image.
+
+Finally, clear the pixels vector so its ready for the next iteratation (pixels is the vector of the pixels of the image, from top left to bottom right).
 
 ```c++
 //driver
@@ -270,5 +306,13 @@ int main()
 
 
 ## Conclusion
+
 ---
+
 In the end, I had a lot of fun with this project. It was a short and simple project but produced some pretty amazing outputs. Openning up the recolored images was like openning presents on christmas day, and filled me with joy on how closely or differently the recolored images matched the original image. I look through each image to try and find the differences from eachother and the original, like a version of the *Where's Waldo?* books. I learned more about the K-Means algorithm and some good practice with C++. If I had more time, probably would have optimized it a bit more, then run some 4K images through it with larger K values and see what it produces.
+
+## Footnotes
+
+---
+
+[^1]: The boots do have extremely faint shading, almost completely invisible. The brown used for his boot shading was probably repurposed to seperate the white of his gloves and the bottom of his boot from the tan color of skin.
