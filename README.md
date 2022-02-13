@@ -165,7 +165,7 @@ for (int i = 1; i < maxClusters; i++)
 }
 ```
 
-## K-Means Main Loop
+## K-Means Loop
 
 The main loop of the K-Means algorithm is simple. For each pixel, calculate the distance from the pixel to each mean of the clusters, and assign the pixel to the cluster that has the shortest distance.
 
