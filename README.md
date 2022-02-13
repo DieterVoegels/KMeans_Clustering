@@ -39,7 +39,9 @@ When K = 7, only his side burns have shading. [^1]
 
 To decode the image I used lodepng.h, a simple open source encoding and decoding png library.
 
-It decodes the image into an array of bytes, with each image being represent by 4 bytes (RGBA). I then took each raw pixel data and converted it into a pixel data structure so it would be easier to work with. The structure also contained the previous cluster the pixel was assigned to and the current cluster the pixel is assigned to.
+It decodes the image into an array of bytes, with each image being represent by 4 bytes (RGBA). I then took each raw pixel data and converted it into a pixel data structure so it would be easier to work with.
+
+The structure also contained the previous cluster the pixel was assigned to and the current cluster the pixel is assigned to.
 
 Once I ran the K-means algorithm on the image, I converted the pixels back into raw data form and encoded them into a new image.
 
@@ -292,10 +294,17 @@ int main()
 }
 ```
 
-
 ## Conclusion
 
-In the end, I had a lot of fun with this project. It was a short and simple project but produced some pretty amazing outputs. Openning up the recolored images was like openning presents on christmas day, and filled me with joy on how closely or differently the recolored images matched the original image. I look through each image to try and find the differences from eachother and the original, like a version of the *Where's Waldo?* books. I learned more about the K-Means algorithm and some good practice with C++. If I had more time, probably would have optimized it a bit more, then run some 4K images through it with larger K values and see what it produces.
+In the end, I had a lot of fun with this project. It was a short and simple project but produced some pretty amazing outputs.
+
+Openning up the recolored images was like openning presents on christmas day, and filled me with joy on how closely or differently the recolored images matched the original image.
+
+I enjoyed looking through each image to try and find the differences from eachother and from the original, like a version of the *Where's Waldo?* books.
+
+I learned more about the K-Means algorithm and some good practice with C++.
+
+If I had more time, probably would have optimized it a bit more, then run some 4K images through it with larger K values and see what it produces.
 
 ## Footnotes
 
